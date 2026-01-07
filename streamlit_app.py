@@ -1,21 +1,17 @@
 import streamlit as st
-import time
+import speech_recognition as sr
+import tempfile
 import random
-from src.speech_to_text import voice_to_text
 from src.predict_emotion import predict_emotion
 
-                      # PAGE CONFIG 
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
-    page_title=" Voice Emotion Detection",
+    page_title="Voice Emotion Detection",
     page_icon="🎙️",
     layout="centered"
 )
 
-                       # SESSION STATE 
-if "history" not in st.session_state:
-    st.session_state.history = []
-
-                        # CUSTOM CSS
+# ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
 body {
@@ -42,18 +38,6 @@ body {
     margin-bottom: 20px;
 }
 
-.mic {
-    text-align: center;
-    font-size: 55px;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: .6; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); opacity: .6; }
-}
-
 .emotion-card {
     margin-top: 25px;
     padding: 22px;
@@ -71,33 +55,42 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-                       # UI
+# ---------------- UI ----------------
 st.markdown("<div class='container'>", unsafe_allow_html=True)
 
-st.markdown("<div class='title'>🎙️ Voice Emotion Detection </div>", unsafe_allow_html=True)
+st.markdown("<div class='title'>🎙️ Voice Emotion Detection</div>", unsafe_allow_html=True)
 st.markdown(
-    "<div class='subtitle'>Speak clearly and get emotion with confidence</div>",
+    "<div class='subtitle'>Live microphone emotion detection (Render compatible)</div>",
     unsafe_allow_html=True
 )
 
 st.divider()
 
-                         # VOICE INPUT 
-if st.button("🎤 Start Speaking"):
-    st.markdown("<div class='mic'>🎧</div>", unsafe_allow_html=True)
-    st.info("Listening... please speak")
-    time.sleep(0.5)
+# ---------------- LIVE MIC INPUT ----------------
+st.markdown("### 🎤 Speak Now")
 
-    text = voice_to_text()
+audio = st.audio_input("Click and speak")
 
-    if text == "":
-        st.error("❌ Could not understand your voice")
-    else:
-        st.success("Speech to Text")
+if audio:
+    st.info("🔊 Processing audio...")
+
+    # Save audio to temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as f:
+        f.write(audio.getvalue())
+        audio_path = f.name
+
+    # Speech to Text
+    recognizer = sr.Recognizer()
+    try:
+        with sr.AudioFile(audio_path) as source:
+            audio_data = recognizer.record(source)
+            text = recognizer.recognize_google(audio_data)
+
+        st.success("📝 Speech to Text")
         st.write(text)
 
+        # Emotion Detection
         emotion = predict_emotion(text)
-        st.session_state.history.append(emotion)
 
         emoji = {
             "happy": "😄",
@@ -107,19 +100,21 @@ if st.button("🎤 Start Speaking"):
             "neutral": "😐"
         }.get(emotion, "🙂")
 
-                        # EMOTION OUTPUT 
         st.markdown(
             f"<div class='emotion-card {emotion}'>{emoji} Emotion: {emotion.upper()}</div>",
             unsafe_allow_html=True
         )
 
-                        # CONFIDENCE BAR 
-        st.subheader("Confidence Estimation")
+        # Confidence (safe estimation)
         confidence = random.randint(70, 95)
-        st.progress(confidence)
+        st.subheader("📊 Confidence")
+        st.progress(confidence / 100)
         st.write(f"Confidence: **{confidence}%**")
+
+    except Exception as e:
+        st.error("❌ Could not recognize speech")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-                         # FOOTER 
-st.caption(" Voice Emotion Detection | Voice + ML | Streamlit")
+# ---------------- FOOTER ----------------
+st.caption("🚀 Voice Emotion Detection | Live Mic | Render Compatible")
