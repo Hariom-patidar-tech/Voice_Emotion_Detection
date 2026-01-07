@@ -7,114 +7,198 @@ from src.predict_emotion import predict_emotion
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Voice Emotion Detection",
-    page_icon="🎙️",
+    page_icon="",
     layout="centered"
 )
 
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
-body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+
+/* ===== GLOBAL BACKGROUND ===== */
+.stApp {
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
 }
 
+/* ===== MAIN CARD ===== */
 .container {
-    background: rgba(255,255,255,0.95);
-    padding: 30px;
-    border-radius: 22px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    padding: 0px;
+    border-radius: 18px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 3 30px 60px rgba(0,0,0,0.25);
+    animation: fadeIn 1.2s ease-in-out;
 }
 
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* ===== TITLE ===== */
 .title {
     text-align: center;
-    font-size: 36px;
-    font-weight: 800;
+    font-size: 30px;
+    font-weight: 1000;
+    color: #0f172a;
 }
 
 .subtitle {
     text-align: center;
-    font-size: 15px;
-    color: #4b5563;
-    margin-bottom: 20px;
+    font-size: 18px;
+    color: #475569;
+    margin-bottom: 30px;
 }
 
-.emotion-card {
-    margin-top: 25px;
-    padding: 22px;
-    border-radius: 18px;
-    font-size: 26px;
-    font-weight: bold;
+/* ===== MIC ICON ===== */
+.mic {
+    hight:10px;
+    width: 10px;
     text-align: center;
+    font-size: 10px;
+    animation: pulse 1.3s infinite;
+    margin-bottom: 40px;
 }
 
-.happy { background:#dcfce7; color:#166534; }
-.sad { background:#e0e7ff; color:#3730a3; }
-.angry { background:#fee2e2; color:#7f1d1d; }
-.fear { background:#fef3c7; color:#92400e; }
-.neutral { background:#f3f4f6; color:#111827; }
+/* ===== EMOTION CARD ===== */
+.emotion-card {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 16px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Emotion Colors */
+/* 😊 HAPPY – energetic, positive, fresh */
+.happy {
+    background: linear-gradient(135deg, #FFF6B7, #FCD34D);
+    color: #92400E;
+}
+
+/* 😢 SAD – calm, deep, emotional */
+.sad {
+    background: linear-gradient(135deg, #E0E7FF, #A5B4FC);
+    color: #1E3A8A;
+}
+
+/* 😡 ANGRY – intense, strong, alert */
+.angry {
+    background: linear-gradient(135deg, #FECACA, #F87171);
+    color: #7F1D1D;
+}
+
+/* 😨 FEAR – alert, anxious, warning */
+.fear {
+    background: linear-gradient(135deg, #FEF3C7, #F59E0B);
+    color: #92400E;
+}
+
+/* 😐 NEUTRAL – balanced, professional */
+.neutral {
+    background: linear-gradient(135deg, #F3F4F6, #D1D5DB);
+    color: #111827;
+}
+
+/*  SURPRISE – balanced, professional */
+.neutral {
+    background: linear-gradient(135deg, #F3F4F2, #D1D5DD);
+    color: #114563;
+}
+
+
+/* ===== CONFIDENCE ===== */
+.conf-text {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: #2563eb;
+    margin-top: 10px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    font-size: 13px;
+    color: #475569;
+    margin-top: 24px;
+}
+.speech-text {
+    background: #f1f5f9;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 30px;
+    margin-top: 15px;
+    border-left: 4px solid #2987eb;
+}
+/* Speak Now heading – SMALL & CLEAN */
+
+.speak-now {
+    font-size: 20px !important;   /* chhota */
+    font-weight: 600;
+    color: #215d5d;
+    margin-bottom: 12px;
+}
+
+}
+
+
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------- UI ----------------
 st.markdown("<div class='container'>", unsafe_allow_html=True)
 
-st.markdown("<div class='title'>🎙️ Voice Emotion Detection</div>", unsafe_allow_html=True)
-st.markdown(
-    "<div class='subtitle'>Live microphone emotion detection (Render compatible)</div>",
-    unsafe_allow_html=True
-)
+# 👇 SAB KUCH ANDAR
+st.markdown("<div class='title'>     Voice Emotion Detection</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Live microphone emotion detection</div>", unsafe_allow_html=True)
 
-st.divider()
-
-# ---------------- LIVE MIC INPUT ----------------
 st.markdown("### 🎤 Speak Now")
-
 audio = st.audio_input("Click and speak")
 
 if audio:
-    st.info("🔊 Processing audio...")
+    st.write("Processing...")
 
-    # Save audio to temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as f:
         f.write(audio.getvalue())
         audio_path = f.name
 
-    # Speech to Text
     recognizer = sr.Recognizer()
     try:
         with sr.AudioFile(audio_path) as source:
             audio_data = recognizer.record(source)
             text = recognizer.recognize_google(audio_data)
 
-        st.success("📝 Speech to Text")
+        
         st.write(text)
 
-        # Emotion Detection
         emotion = predict_emotion(text)
 
         emoji = {
-            "happy": "😄",
-            "sad": "😢",
-            "angry": "😡",
-            "fear": "😨",
-            "neutral": "😐"
-        }.get(emotion, "🙂")
+            "happy": "",
+            "sad": "",
+            "angry": "",
+            "fear": "",
+            "neutral": ""
+        }.get(emotion, "")
 
         st.markdown(
             f"<div class='emotion-card {emotion}'>{emoji} Emotion: {emotion.upper()}</div>",
             unsafe_allow_html=True
         )
 
-        # Confidence (safe estimation)
-        confidence = random.randint(70, 95)
-        st.subheader("📊 Confidence")
+        confidence = random.randint(75, 95)
         st.progress(confidence / 100)
-        st.write(f"Confidence: **{confidence}%**")
+        st.markdown(
+            f"<div class='conf-text'>Confidence: {confidence}%</div>",
+            unsafe_allow_html=True
+        )
 
-    except Exception as e:
+    except:
         st.error("❌ Could not recognize speech")
 
 st.markdown("</div>", unsafe_allow_html=True)
-
-# ---------------- FOOTER ----------------
-st.caption("🚀 Voice Emotion Detection | Live Mic | Render Compatible")
