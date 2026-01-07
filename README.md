@@ -1,42 +1,59 @@
-\# 🎙️ Voice Emotion Detection
+# 🎙️ Voice Emotion Detection
 
+An AI-based Voice Emotion Detection system that analyzes human emotions from **spoken voice**
+by converting speech into text and applying **Machine Learning models** to predict emotions.
 
+This project is built using **Python, Streamlit, Speech Recognition, and ML algorithms** and
+provides a clean, interactive UI with real-time emotion detection.
 
-AI-based system that detects human emotions from voice using
+---
 
-speech recognition and machine learning.
+## 🚀 Features
 
+- 🎤 **Live Voice Input** using microphone
+- 📝 **Speech to Text** conversion
+- 😊 **Emotion Detection** (Happy, Sad, Angry, Fear, Neutral)
+- 📊 **Confidence Estimation (%)**
+- 🎧 **Animated Microphone UI**
+- 🧠 **Multiple ML Models Trained & Compared**
+- 🎨 **Modern Streamlit Interface**
+- 📱 **Mobile-Friendly UI**
 
+---
 
-\## 🚀 Features
+## 🧠 Emotions Supported
 
-\- 🎤 Voice input via microphone
+- 😄 Happy  
+- 😢 Sad  
+- 😡 Angry  
+- 😨 Fear  
+- 😐 Neutral  
 
-\- 📝 Speech-to-text conversion
+---
 
-\- 😊 Emotion detection
+## 🛠️ Tech Stack
 
-\- 📊 Confidence estimation
+- **Programming Language:** Python 3.10  
+- **Frontend:** Streamlit  
+- **Speech Recognition:** SpeechRecognition (Google API)  
+- **Machine Learning:**  
+  - Logistic Regression  
+  - Support Vector Machine (SVM)  
+  - Naive Bayes  
+  - Decision Tree  
+  - Random Forest  
+- **Libraries:** scikit-learn, pandas, numpy  
 
-\- 🎨 Streamlit UI
+---
 
+## 📁 Project Structure
 
-
-\## 🛠 Tech Stack
-
-\- Python 3.10
-
-\- Streamlit
-
-\- SpeechRecognition
-
-\- Scikit-learn
 
 
 
 \## ▶️ Run Project
 
-```bash
+
 
 pip install -r requirements.txt
 
