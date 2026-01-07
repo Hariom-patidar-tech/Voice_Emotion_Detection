@@ -8,7 +8,7 @@ provides a clean, interactive UI with real-time emotion detection.
 
 ---
 
-## 🚀 Features
+##  Features
 
 - 🎤 **Live Voice Input** using microphone
 - 📝 **Speech to Text** conversion
@@ -21,7 +21,7 @@ provides a clean, interactive UI with real-time emotion detection.
 
 ---
 
-## 🧠 Emotions Supported
+##  Emotions Supported
 
 - 😄 Happy  
 - 😢 Sad  

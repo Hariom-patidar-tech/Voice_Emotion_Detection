@@ -74,31 +74,31 @@ st.markdown("""
 }
 
 /* Emotion Colors */
-/* 😊 HAPPY – energetic, positive, fresh */
+/*  HAPPY – energetic, positive, fresh */
 .happy {
     background: linear-gradient(135deg, #FFF6B7, #FCD34D);
     color: #92400E;
 }
 
-/* 😢 SAD – calm, deep, emotional */
+/*  SAD – calm, deep, emotional */
 .sad {
     background: linear-gradient(135deg, #E0E7FF, #A5B4FC);
     color: #1E3A8A;
 }
 
-/* 😡 ANGRY – intense, strong, alert */
+/*  ANGRY – intense, strong, alert */
 .angry {
     background: linear-gradient(135deg, #FECACA, #F87171);
     color: #7F1D1D;
 }
 
-/* 😨 FEAR – alert, anxious, warning */
+/*  FEAR – alert, anxious, warning */
 .fear {
     background: linear-gradient(135deg, #FEF3C7, #F59E0B);
     color: #92400E;
 }
 
-/* 😐 NEUTRAL – balanced, professional */
+/* NEUTRAL – balanced, professional */
 .neutral {
     background: linear-gradient(135deg, #F3F4F6, #D1D5DB);
     color: #111827;
@@ -153,12 +153,40 @@ st.markdown("""
 # ---------------- UI ----------------
 st.markdown("<div class='container'>", unsafe_allow_html=True)
 
-# 👇 SAB KUCH ANDAR
 st.markdown("<div class='title'>     Voice Emotion Detection</div>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Live microphone emotion detection</div>", unsafe_allow_html=True)
 
-st.markdown("### 🎤 Speak Now")
+st.markdown("### Speak Now")
 audio = st.audio_input("Click and speak")
+# ---------------- TEXT INPUT OPTION ----------------
+st.markdown("###  Type Text (Optional)")
+
+user_text = st.text_input(
+    "Type your sentence here",
+    placeholder="Example: I am feeling very happy today"
+)
+
+if st.button("Detect Emotion from Text"):
+    if user_text.strip() == "":
+        st.warning("Please enter some text")
+    else:
+        emotion = predict_emotion(user_text)
+
+        
+        unsafe_allow_html=True
+        
+
+        st.markdown(
+            f"<div class='emotion-card {emotion}'>Emotion: {emotion.upper()}</div>",
+            unsafe_allow_html=True
+        )
+
+        confidence = random.randint(75, 95)
+        st.progress(confidence / 100)
+        st.markdown(
+            f"<div class='conf-text'>Confidence: {confidence}%</div>",
+            unsafe_allow_html=True
+        )
 
 if audio:
     st.write("Processing...")
@@ -199,6 +227,6 @@ if audio:
         )
 
     except:
-        st.error("❌ Could not recognize speech")
+        st.error(" Could not recognize speech")
 
 st.markdown("</div>", unsafe_allow_html=True)

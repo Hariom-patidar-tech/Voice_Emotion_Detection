@@ -71,8 +71,8 @@ for name, model in models.items():
 
                          # Best Model
 best_model = max(results, key=results.get)
-print("\n✅ Best Model:", best_model)
-print("✅ Best Accuracy:", results[best_model])
+print("\n Best Model:", best_model)
+print(" Best Accuracy:", results[best_model])
 
                           # Save best model name
 with open("model/best_model.txt", "w") as f:
