@@ -17,12 +17,12 @@ st.markdown("""
 
 /* ===== GLOBAL BACKGROUND ===== */
 .stApp {
-    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    background: linear-gradient(160deg, #c1bf68, #66a6ff);
 }
 
-/* ===== MAIN CARD ===== */
+/* MAIN CARD  */
 .container {
-    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    background: linear-gradient(60deg, #ffffff, #87b48a);
     padding: 0px;
     border-radius: 18px;
     max-width: 400px;
@@ -37,32 +37,23 @@ st.markdown("""
     100% { transform: scale(1); }
 }
 
-/* ===== TITLE ===== */
+/*  TITLE */
 .title {
     text-align: center;
-    font-size: 30px;
-    font-weight: 1000;
-    color: #0f172a;
+    font-size: 40px;
+    font-weight: 900;
+    color:#092904;
 }
 
 .subtitle {
     text-align: center;
     font-size: 18px;
-    color: #475569;
+    font-weight:600;
+    color:#081d21;
     margin-bottom: 30px;
 }
 
-/* ===== MIC ICON ===== */
-.mic {
-    hight:10px;
-    width: 10px;
-    text-align: center;
-    font-size: 10px;
-    animation: pulse 1.3s infinite;
-    margin-bottom: 40px;
-}
-
-/* ===== EMOTION CARD ===== */
+/*  EMOTION CARD  */
 .emotion-card {
     margin-top: 10px;
     padding: 8px;
@@ -111,35 +102,27 @@ st.markdown("""
 }
 
 
-/* ===== CONFIDENCE ===== */
+/* CONFIDENCE  */
 .conf-text {
     text-align: center;
     font-size: 20px;
     font-weight: 800;
-    color: #2563eb;
+    color: #0d515f;
     margin-top: 10px;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    text-align: center;
-    font-size: 13px;
-    color: #475569;
-    margin-top: 24px;
-}
 .speech-text {
-    background: #f1f5f9;
+    background: #080a46;
     padding: 12px;
     border-radius: 10px;
     font-size: 30px;
     margin-top: 15px;
     border-left: 4px solid #2987eb;
 }
-/* Speak Now heading – SMALL & CLEAN */
 
 .speak-now {
-    font-size: 20px !important;   /* chhota */
-    font-weight: 600;
+    font-size: 10px !important; 
+    font-weight: 200;
     color: #215d5d;
     margin-bottom: 12px;
 }
@@ -162,8 +145,8 @@ audio = st.audio_input("Click and speak")
 st.markdown("###  Type Text (Optional)")
 
 user_text = st.text_input(
-    "Type your sentence here",
-    placeholder="Example: I am feeling very happy today"
+    "Type your text here",
+    placeholder="Example: type your text"
 )
 
 if st.button("Detect Emotion from Text"):
