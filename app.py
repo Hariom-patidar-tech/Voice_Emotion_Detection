@@ -1,6 +1,6 @@
 import streamlit as st
 from src.speech_to_text import voice_to_text
-from src.emotion_model import predict_emotion   # tumhara model
+from src.predict_emotion import predict_emotion   # tumhara model
 
 st.title("🎧 Voice Emotion Detection")
 
