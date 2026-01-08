@@ -1,8 +1,7 @@
 import streamlit as st
 import speech_recognition as sr
 import io
-import numpy as np
-import soundfile as sf
+import wave
 
 def voice_to_text(language="en-IN"):
     st.subheader("🎙 Speak now")
@@ -12,16 +11,17 @@ def voice_to_text(language="en-IN"):
     if audio is None:
         return ""
 
-    # audio bytes read
     audio_bytes = audio.read()
 
-    # bytes → numpy
-    data, samplerate = sf.read(io.BytesIO(audio_bytes))
+    # WAV bytes read using wave module (built-in)
+    with wave.open(io.BytesIO(audio_bytes), 'rb') as wf:
+        sample_rate = wf.getframerate()
+        frames = wf.readframes(wf.getnframes())
 
     recognizer = sr.Recognizer()
     audio_data = sr.AudioData(
-        data.tobytes(),
-        samplerate=samplerate,
+        frames,
+        sample_rate=sample_rate,
         sample_width=2
     )
 
