@@ -96,7 +96,7 @@ st.markdown("""
 }
 
 /*  SURPRISE – balanced, professional */
-.neutral {
+.surprise {
     background: linear-gradient(135deg, #F3F4F2, #D1D5DD);
     color: #114563;
 }
@@ -126,9 +126,6 @@ st.markdown("""
     color: #215d5d;
     margin-bottom: 12px;
 }
-
-}
-
 
 </style>
 """, unsafe_allow_html=True)

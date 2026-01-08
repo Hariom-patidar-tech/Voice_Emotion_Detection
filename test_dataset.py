@@ -5,13 +5,20 @@ from sklearn.metrics import accuracy_score
 test_texts = [
     "I am feeling happy",
     "I am very sad",
-    "I am angry today"
+    "I am angry today",
+    "I am good",
+    "I am shock",
+    "I am scared"
+    
 ]
 
 test_labels = [
     "happy",
     "sad",
-    "angry"
+    "angry",
+    "nuetral",
+    "surprise",
+    "fear"
 ]
 
                                    # Load vectorizer
@@ -21,12 +28,6 @@ with open("model/vectorizer.pkl", "rb") as f:
 X_test = vectorizer.transform(test_texts)
 
 models = [
-    "LogisticRegression",
-    "SVM",
-    "NaiveBayes",
-    "DecisionTree",
-    "RandomForest",
-    "KNN",
     "GradientBoosting"
 ]
 
