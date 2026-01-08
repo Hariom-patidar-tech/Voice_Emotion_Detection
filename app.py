@@ -1,19 +1,14 @@
-# app.py
+import streamlit as st
 from src.speech_to_text import voice_to_text
-from src.predict_emotion import predict_emotion
+from src.emotion_model import predict_emotion   # tumhara model
 
-def main():
-    print(" Voice Emotion Detection Started")
+st.title("🎧 Voice Emotion Detection")
 
-    text = voice_to_text()
+text = voice_to_text()
 
-    if text == "":
-        print(" Please Try Again")
-        return
-
+if text != "":
+    st.write("📝 Recognized Text:", text)
     emotion = predict_emotion(text)
-
-    print(" Detected Emotion:", emotion)
-
-if __name__ == "__main__":
-    main()
+    st.success(f"😊 Emotion: {emotion}")
+else:
+    st.info("Please speak to detect emotion")
