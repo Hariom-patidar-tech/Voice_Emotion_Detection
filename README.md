@@ -18,16 +18,17 @@ provides a clean, interactive UI with real-time emotion detection.
 - 🧠 **Multiple ML Models Trained & Compared**
 - 🎨 **Modern Streamlit Interface**
 - 📱 **Mobile-Friendly UI**
+- 
 
 ---
 
 ##  Emotions Supported
 
-- 😄 Happy  
-- 😢 Sad  
-- 😡 Angry  
-- 😨 Fear  
-- 😐 Neutral  
+-  Happy  
+-  Sad  
+-  Angry  
+-  Fear  
+-  Neutral  
 
 ---
 
