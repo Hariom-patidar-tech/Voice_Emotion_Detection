@@ -16,9 +16,10 @@ st.markdown("""
 <style>
 
 /* ===== GLOBAL BACKGROUND ===== */
-.stApp {
-    background: linear-gradient(160deg, #c1bf68, #66a6ff);
+html, body, [data-testid="stAppViewContainer"] {
+    background: linear-gradient(160deg, #c1bf68, #66a6ff) !important;
 }
+
 
 /* MAIN CARD  */
 .container {
