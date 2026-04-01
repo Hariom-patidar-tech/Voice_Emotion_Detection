@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 import streamlit as st
-from src.speech_to_text import voice_to_text
+from src.speech_to_text import voice_to_text 
 from src.predict_emotion import predict_emotion   # tumhara model
 
 st.title(" Voice Emotion Detection")
