@@ -1,6 +1,6 @@
 import streamlit as st
 from src.speech_to_text import voice_to_text
-from src.predict_emotion import predict_emotion
+from src.predict_emotion import predict_emotion 
 
 st.set_page_config(
     page_title="Voice Emotion Detection",
