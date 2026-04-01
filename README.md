@@ -2,7 +2,7 @@
 
 An AI-based Voice Emotion Detection system that analyzes human emotions from **spoken voice**
 by converting speech into text and applying **Machine Learning models** to predict emotions.
-
+ 
 This project is built using **Python, Streamlit, Speech Recognition, and ML algorithms** and
 provides a clean, interactive UI with real-time emotion detection.
 
